@@ -1,25 +1,27 @@
-import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+import MainLayout from "./layouts/MainLayout";
+
+import Dashboard from "./pages/Dashboard";
+import Problems from "./pages/Problems";
+import Analytics from "./pages/Analytics";
+import AICoach from "./pages/AICoach";
+import Profile from "./pages/Profile";
 
 function App() {
-  const [message, setMessage] = useState("Connecting to CP Coach...");
-
-  useEffect(() => {
-    fetch("http://localhost:5000/api/health")
-      .then((response) => response.json())
-      .then((data) => {
-        setMessage(data.message);
-      })
-      .catch((error) => {
-        console.error("API error:", error);
-        setMessage("Could not connect to CP Coach backend");
-      });
-  }, []);
-
   return (
-    <div>
-      <h1>CP Coach</h1>
-      <p>{message}</p>
-    </div>
+    <BrowserRouter>
+      <MainLayout>
+        <Routes>
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/problems" element={<Problems />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/coach" element={<AICoach />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </MainLayout>
+    </BrowserRouter>
   );
 }
 
