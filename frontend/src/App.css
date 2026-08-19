@@ -381,3 +381,11 @@
   color: #c4b5fd;
   border: 1px solid #3b1f63;
 }
+
+
+.problems-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}

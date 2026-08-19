@@ -2,18 +2,21 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
+const healthRoutes = require("./routes/healthRoutes");
+const problemRoutes = require("./routes/problemRoutes");
+const errorHandler = require("./middleware/errorHandler");
+
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
-app.get("/api/health", (req, res) => {
-  res.json({
-    status: "success",
-    message: "CP Coach API is running",
-  });
-});
+app.use("/api/health", healthRoutes);
+app.use("/api/problems", problemRoutes);
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`CP Coach backend running on http://localhost:${PORT}`);

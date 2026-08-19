@@ -14,10 +14,15 @@ function App() {
       <MainLayout>
         <Routes>
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
           <Route path="/dashboard" element={<Dashboard />} />
+
           <Route path="/problems" element={<Problems />} />
+
           <Route path="/analytics" element={<Analytics />} />
+
           <Route path="/coach" element={<AICoach />} />
+
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </MainLayout>

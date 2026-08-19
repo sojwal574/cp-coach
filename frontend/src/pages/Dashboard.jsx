@@ -3,8 +3,22 @@ import RatingChart from "../components/RatingChart";
 import SkillOverview from "../components/SkillOverview";
 import RecommendationList from "../components/RecommendationList";
 import AIInsight from "../components/AIInsight";
+import { useEffect, useState } from "react";
+import { getHealth } from "../services/api";
 
 function Dashboard() {
+  const [backendStatus, setBackendStatus] = useState("Checking backend...");
+
+  useEffect(() => {
+    getHealth()
+      .then((data) => {
+        setBackendStatus(data.message);
+      })
+      .catch(() => {
+        setBackendStatus("Backend unavailable");
+      });
+  }, []);
+
   return (
     <>
       <h1 className="page-title">Dashboard</h1>
@@ -12,6 +26,8 @@ function Dashboard() {
       <p className="page-subtitle">
         Your competitive programming progress at a glance.
       </p>
+
+      <p className="backend-status">{backendStatus}</p>
 
       <section className="stats-grid">
         <StatCard
