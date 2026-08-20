@@ -1,7 +1,7 @@
 const problemService = require("../services/problemService");
 
-function getProblems(req, res) {
-  const problems = problemService.getAllProblems();
+async function getProblems(req, res) {
+  const problems = await problemService.getAllProblems();
 
   res.json({
     status: "success",
@@ -10,8 +10,8 @@ function getProblems(req, res) {
   });
 }
 
-function getProblemById(req, res) {
-  const problem = problemService.getProblemById(req.params.id);
+async function getProblemById(req, res) {
+  const problem = await problemService.getProblemById(req.params.id);
 
   if (!problem) {
     return res.status(404).json({

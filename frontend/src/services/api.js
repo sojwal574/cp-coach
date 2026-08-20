@@ -17,3 +17,7 @@ export function getHealth() {
 export function getProblems() {
   return request("/problems");
 }
+
+export function getUsers() {
+  return request("/users");
+}

@@ -5,6 +5,8 @@ require("dotenv").config();
 const healthRoutes = require("./routes/healthRoutes");
 const problemRoutes = require("./routes/problemRoutes");
 const errorHandler = require("./middleware/errorHandler");
+const testDatabaseConnection = require("./config/testDatabase");
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
@@ -15,9 +17,11 @@ const PORT = process.env.PORT || 5000;
 
 app.use("/api/health", healthRoutes);
 app.use("/api/problems", problemRoutes);
+app.use("/api/users", userRoutes);
 
 app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`CP Coach backend running on http://localhost:${PORT}`);
+  testDatabaseConnection();
 });

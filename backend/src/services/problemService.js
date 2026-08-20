@@ -1,30 +1,15 @@
-const problems = [
-  {
-    id: 1,
-    name: "Two Sum",
-    rating: 800,
-    tags: ["implementation", "math"],
-  },
-  {
-    id: 2,
-    name: "Binary Search",
-    rating: 1000,
-    tags: ["binary search"],
-  },
-  {
-    id: 3,
-    name: "Graph Paths",
-    rating: 1400,
-    tags: ["graphs", "dfs"],
-  },
-];
+const pool = require("../config/database");
 
-function getAllProblems() {
-  return problems;
+async function getAllProblems() {
+  const result = await pool.query("SELECT * FROM problems ORDER BY id");
+
+  return result.rows;
 }
 
-function getProblemById(id) {
-  return problems.find((problem) => problem.id === Number(id));
+async function getProblemById(id) {
+  const result = await pool.query("SELECT * FROM problems WHERE id = $1", [id]);
+
+  return result.rows[0];
 }
 
 module.exports = {
