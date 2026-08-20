@@ -10,6 +10,23 @@ async function getUsers(req, res) {
   });
 }
 
+async function getMe(req, res) {
+  const user = await userService.getUserById(req.user.userId);
+
+  if (!user) {
+    return res.status(404).json({
+      status: "error",
+      message: "User not found",
+    });
+  }
+
+  res.json({
+    status: "success",
+    data: user,
+  });
+}
+
 module.exports = {
   getUsers,
+  getMe,
 };
