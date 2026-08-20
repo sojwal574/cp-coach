@@ -1,4 +1,5 @@
-const CODEFORCES_API_URL = "https://codeforces.com/api";
+const CODEFORCES_API_URL =
+  process.env.CODEFORCES_API_URL || "https://codeforces.com/api";
 
 async function getUserInfo(handle) {
   const response = await fetch(
