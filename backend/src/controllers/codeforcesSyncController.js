@@ -1,14 +1,21 @@
 const codeforcesSyncService = require("../services/codeforcesSyncService");
 
 async function syncUser(req, res) {
-  const { handle } = req.params;
+  try {
+    const { handle } = req.params;
 
-  const result = await codeforcesSyncService.syncUser(handle);
+    const result = await codeforcesSyncService.syncUser(handle);
 
-  res.json({
-    status: "success",
-    data: result,
-  });
+    res.json({
+      status: "success",
+      data: result,
+    });
+  } catch (error) {
+    res.status(502).json({
+      status: "error",
+      message: "Unable to reach Codeforces API",
+    });
+  }
 }
 
 module.exports = {
