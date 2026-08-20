@@ -8,6 +8,7 @@ const errorHandler = require("./middleware/errorHandler");
 const testDatabaseConnection = require("./config/testDatabase");
 const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
+const codeforcesRoutes = require("./routes/codeforcesRoutes");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use("/api/health", healthRoutes);
 app.use("/api/problems", problemRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/codeforces", codeforcesRoutes);
 
 app.use(errorHandler);
 
