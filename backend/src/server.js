@@ -7,6 +7,7 @@ const problemRoutes = require("./routes/problemRoutes");
 const errorHandler = require("./middleware/errorHandler");
 const testDatabaseConnection = require("./config/testDatabase");
 const userRoutes = require("./routes/userRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
@@ -18,6 +19,7 @@ const PORT = process.env.PORT || 5000;
 app.use("/api/health", healthRoutes);
 app.use("/api/problems", problemRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
 
 app.use(errorHandler);
 
