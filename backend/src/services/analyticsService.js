@@ -37,7 +37,33 @@ async function getVerdictStats(userId) {
   return result.rows;
 }
 
+async function getTopicStats(userId) {
+  const result = await pool.query(
+    `
+    SELECT
+      topic,
+      COUNT(*) AS total_submissions,
+      COUNT(*) FILTER (WHERE verdict = 'OK') AS accepted_submissions
+    FROM (
+      SELECT
+        unnest(p.tags) AS topic,
+        s.verdict
+      FROM submissions s
+      JOIN problems p
+        ON s.problem_id = p.id
+      WHERE s.user_id = $1
+    ) AS topic_data
+    GROUP BY topic
+    ORDER BY total_submissions DESC
+    `,
+    [userId],
+  );
+
+  return result.rows;
+}
+
 module.exports = {
   getSubmissionStats,
   getVerdictStats,
+  getTopicStats,
 };

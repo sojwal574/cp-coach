@@ -18,7 +18,17 @@ async function getVerdictStats(req, res) {
   });
 }
 
+async function getTopicStats(req, res) {
+  const stats = await analyticsService.getTopicStats(req.user.userId);
+
+  res.json({
+    status: "success",
+    data: stats,
+  });
+}
+
 module.exports = {
   getSubmissionStats,
   getVerdictStats,
+  getTopicStats,
 };
