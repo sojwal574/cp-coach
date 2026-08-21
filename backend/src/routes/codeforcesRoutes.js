@@ -1,4 +1,5 @@
 const express = require("express");
+const authenticate = require("../middleware/authMiddleware");
 
 const {
   getApiInfo,
@@ -11,6 +12,6 @@ const router = express.Router();
 
 router.get("/info", getApiInfo);
 router.get("/user/:handle", getUserInfo);
-router.post("/sync/:handle", syncUser);
+router.post("/sync/:handle", authenticate, syncUser);
 
 module.exports = router;
