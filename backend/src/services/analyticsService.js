@@ -20,6 +20,24 @@ async function getSubmissionStats(userId) {
   return result.rows[0];
 }
 
+async function getVerdictStats(userId) {
+  const result = await pool.query(
+    `
+    SELECT
+      verdict,
+      COUNT(*) AS count
+    FROM submissions
+    WHERE user_id = $1
+    GROUP BY verdict
+    ORDER BY count DESC
+    `,
+    [userId],
+  );
+
+  return result.rows;
+}
+
 module.exports = {
   getSubmissionStats,
+  getVerdictStats,
 };

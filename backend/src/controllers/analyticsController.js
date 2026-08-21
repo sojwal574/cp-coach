@@ -9,6 +9,16 @@ async function getSubmissionStats(req, res) {
   });
 }
 
+async function getVerdictStats(req, res) {
+  const stats = await analyticsService.getVerdictStats(req.user.userId);
+
+  res.json({
+    status: "success",
+    data: stats,
+  });
+}
+
 module.exports = {
   getSubmissionStats,
+  getVerdictStats,
 };
